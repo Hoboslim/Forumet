@@ -1,0 +1,36 @@
+﻿@page
+@model Forumet.Pages.Posts.IndexModel
+@using Forumet.Models
+@{
+}
+
+<h2>Inlägg i @Model.Posts.FirstOrDefault()?.Category?.Name</h2>
+
+<a class="btn btn-success mb-3" asp-page="/Posts/Create" asp-route-categoryId="@Model.CategoryId">Skapa ett nytt inlägg</a>
+
+@if (!Model.Posts.Any())
+{
+    <p>Finns inga inlägg i denna kategori </p>
+}
+else
+{
+    @foreach(var post in Model.Posts)
+    {
+        <div class="card mb-3">
+            <div class="card-body">
+                <h4>@post.Title</h4>
+                <p> by @post.User.UserName on @post.CreatedAt.ToShortDateString()</p>
+                <p>@post.Content.Substring(0, Math.Min(150, post.Content.Length))...</p>
+                <a asp-page="./Details" asp-route-id="@post.Id">Se hela inlägget</a>
+
+                @if(!string.IsNullOrEmpty(post.ImagePath))
+                {
+                    <img src="@post.ImagePath" alt="Post image" class="img-fluid mb-3" style="max-height: 300px;" />
+                }
+                <p class="card-text"><small class="text-muted">Posted on @post.CreatedAt.ToString("g")</small></p>
+            </div>
+        </div>
+
+
+    }
+}

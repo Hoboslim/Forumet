@@ -1,0 +1,23 @@
+﻿@page
+@model Forumet.Pages.Categories.IndexModel
+@using Forumet.Models
+@{
+}
+
+<h2>Categories</h2>
+
+<div class="row">
+    @foreach(var category in Model.Categories)
+    {
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-body text-center">
+                    <h5 class="card-title">@category.Name</h5>
+                    <a class="btn btn-primary" href="/Posts?categoryId=@category.Id">View Posts</a>
+                    </div>
+                </div>
+            </div>
+    }
+</div>
+
+

@@ -1,0 +1,33 @@
+﻿@page "{categoryId:int?}"
+@model Forumet.Pages.Posts.CreateModel
+
+
+<h2>Skappa nytt inlägg</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label asp-for="Post.Title" class="form-label"></label>
+        <input asp-for="Post.Title" class="form-control" />
+        <span asp-validation-for="Post.Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Post.Content" class="form-label"></label>
+        <textarea asp-for="Post.Content" class="form-control"></textarea>
+        <span asp-validation-for="Post.Content" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Image" class="form-label"></label>
+        <input asp-for="Image" type="file" class="form-control" />
+    </div>
+
+    <input type="hidden" asp-for="Post.CategoryId" />
+
+    <button type="submit" class="btn btn-primary">Create Post</button>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
