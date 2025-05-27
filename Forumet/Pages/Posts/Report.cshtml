@@ -1,0 +1,21 @@
+﻿@page
+@model Forumet.Pages.Posts.ReportModel
+@{
+    
+}
+
+
+<h2>Report Post</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="PostId" />
+
+    <div class="mb-3">
+        <label asp-for="Reason" class="form-label"></label>
+        <textarea asp-for="Reason" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Reason" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-danger">Submit</button>
+
+</form>

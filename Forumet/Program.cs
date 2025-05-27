@@ -19,7 +19,8 @@ namespace Forumet
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-     .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddRoles<IdentityRole>()
+             .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
             builder.Services.AddRazorPages();
@@ -43,7 +44,7 @@ namespace Forumet
 
             app.UseRouting();
 
-            app.UseAuthentication(); 
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

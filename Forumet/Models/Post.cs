@@ -26,15 +26,15 @@ namespace Forumet.Models
             public string? UserId { get; set; }
 
             [ForeignKey("UserId")]
-            public IdentityUser? User { get; set; }  // REMOVE [Required] here!
+            public IdentityUser? User { get; set; }  
 
             [Required]
             public int CategoryId { get; set; }
 
             [ForeignKey("CategoryId")]
-            public Category? Category { get; set; }  // REMOVE [Required] here!
+            public Category? Category { get; set; }  
 
-            // Initialize collections to empty lists to avoid null refs and validation errors
+          
             public ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
             public ICollection<Report> Reports { get; set; } = new List<Report>();
