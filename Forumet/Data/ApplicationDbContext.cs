@@ -33,7 +33,7 @@ namespace Forumet.Data
                 .HasOne(c => c.Post)
                 .WithMany(p => p.Comments)
                 .HasForeignKey(c => c.PostId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
                 
 
             modelBuilder.Entity<PrivateMessage>()
@@ -52,7 +52,7 @@ namespace Forumet.Data
                 .HasOne(r => r.Post)
                 .WithMany(p => p.Reports)
                 .HasForeignKey(r => r.PostId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
                 
 
 

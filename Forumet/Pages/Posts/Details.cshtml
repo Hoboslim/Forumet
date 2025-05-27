@@ -21,6 +21,13 @@
     <strong>Kategori:</strong> @Model.Post.Category.Name
 </p>
 
+<div class="d-flex justify-content-end">
+    <form method="get" asp-page="/Posts/Report">
+        <input type="hidden" name="postId" value="@Model.Post.Id" />
+        <button type="submit" class="btn btn-outline-danger btn-sm">Report Post</button>
+    </form>
+</div>
+
 <a asp-page="./Index" asp-route-categoryId="@Model.Post.CategoryId" class="btn btn-secondary">Tillbaka</a>
 
 <h4>Kommentarer</h4>
@@ -36,9 +43,10 @@
                 <strong>@comment.User?.UserName</strong> • <small>@comment.CreatedAt.ToString("g")</small>
                 <p class="mb-1">@comment.Text</p>
             </div>
-            <form method="post" asp-page="/Posts/Report">
-                <input type="hidden" name="PostId" value="@comment.PostId" />
-                <button type="submit" class="btn btn-outline-danger btn-sm ms-3">Report</button>
+            <form method="get" asp-page="/Posts/Report">
+                <input type="hidden" name="CommentId" value="@comment.Id" />
+                <input type="hidden" name="postId" value="@Model.Post.Id" />
+                <button type="submit" class="btn btn-outline-danger btn-sm ms-3">Report Comment</button>
 
             </form>
         </div>

@@ -22,5 +22,9 @@ namespace Forumet.Models
 
         [ForeignKey("UserId")]
         public IdentityUser User { get; set; }
+
+        public int? CommentId { get; set; }
+        [ForeignKey("CommentId")]
+        public Comment Comment { get; set; }
     }
 }

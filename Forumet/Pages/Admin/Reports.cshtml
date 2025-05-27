@@ -1,0 +1,58 @@
+﻿@page
+@model Forumet.Pages.Admin.ReportsModel
+@{
+    ViewData["Title"] = "Reported Posts";
+}
+
+<h2 class="mb-4">Reported Posts</h2>
+
+@if (!Model.Reports.Any())
+{
+    <div class="alert alert-info">No reports at the moment</div>
+}
+else
+{
+    @foreach (var report in Model.Reports)
+    {
+        if (report.CommentId != null)
+        {
+            <div>
+                <strong>Reported Comment:</strong> @report.Comment.Text
+                <p>On Post: @report.Post.Title</p>
+                <p>Reason: @report.Reason</p>
+
+                <form method="post" asp-page-handler="RemoveComment">
+                    <input type="hidden" name="commentId" value="@report.CommentId" />
+                    <button type="submit" class="btn btn-danger">Remove Comment</button>
+                </form>
+
+                <form method="post" asp-page-handler="IgnoreReport">
+                    <input type="hidden" name="reportId" value="@report.Id" />
+                    <button type="submit" class="btn btn-secondary">Ignore</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <div>
+                <strong>Reported Post:</strong> @report.Post.Title
+                <p>Reason: @report.Reason</p>
+
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" name="postId" value="@report.PostId" />
+                    <button type="submit" class="btn btn-danger">Remove Post</button>
+                </form>
+
+                <form method="post" asp-page-handler="IgnoreReport">
+                    <input type="hidden" name="reportId" value="@report.Id" />
+                    <button type="submit" class="btn btn-secondary">Ignore</button>
+                </form>
+            </div>
+        }
+    }
+
+        
+    
+}
+
+
