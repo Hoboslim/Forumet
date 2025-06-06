@@ -7,17 +7,30 @@
 <h2>Categories</h2>
 
 <div class="row">
-    @foreach(var category in Model.Categories)
+    @foreach (var category in Model.Categories)
     {
         <div class="col-md-3">
             <div class="card mb-3">
+                @if (!string.IsNullOrEmpty(category.ImagePath))
+                {
+                    <img src="~/@category.ImagePath" class="card-img-top" alt="@category.Name" style="height:180px;object-fit:cover;">
+                }
+                else
+                {
+                    <div class="card-img-top bg-light" style="height:180px;display:flex;align-items:center;justify-content:center;">
+                        <span class="text-muted">No image</span>
+                    </div>
+                }
                 <div class="card-body text-center">
                     <h5 class="card-title">@category.Name</h5>
                     <a class="btn btn-primary" href="/Posts?categoryId=@category.Id">View Posts</a>
-                    </div>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-sm btn-secondary" asp-page="/Admin/EditCategory" asp-route-id="@category.Id">Edit</a>
+                        <a class="btn btn-sm btn-danger" asp-page="/Admin/DeleteCategory" asp-route-id="@category.Id">Delete</a>
+                    }
                 </div>
             </div>
+        </div>
     }
 </div>
-
-

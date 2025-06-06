@@ -1,0 +1,24 @@
+﻿@page
+@model Forumet.Pages.Messages.InboxModel
+@{
+    ViewData["Title"] = "Inbox";
+}
+
+<h2>Inbox</h2>
+
+@if (Model.Conversations.Any())
+{
+    <ul class="list-group">
+        @foreach (var convo in Model.Conversations)
+        {
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <span>@convo.UserName</span>
+                <a asp-page="/Messages/Chat" asp-route-OtherUserId="@convo.UserId" class="btn btn-sm btn-outline-primary">Open Chat</a>
+            </li>
+        }
+    </ul>
+}
+else
+{
+    <p>No conversations yet.</p>
+}

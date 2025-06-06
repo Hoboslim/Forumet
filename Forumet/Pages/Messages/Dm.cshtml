@@ -1,0 +1,20 @@
+﻿@page
+@model Forumet.Pages.Messages.DmModel
+@{
+    ViewData["Title"] = "Send Message";
+}
+
+<h2>Skicka meddelande till @Model.RecieverUserName</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="MessageContent">Message</label>
+        <textarea id="MessageContent" name="MessageContent" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Skicka</button>
+</form>
+
+@if (Model.Success)
+{
+    <div class="alert alert-success mt-2">Message Sent!</div>
+}

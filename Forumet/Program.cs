@@ -1,3 +1,4 @@
+
 using Forumet.Data;
 using Forumet.Models;
 using Microsoft.AspNetCore.Identity;
@@ -9,10 +10,10 @@ namespace Forumet
     {
         public static async Task Main(string[] args)
         {
-            
+
             var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+           
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -23,10 +24,23 @@ namespace Forumet
                 .AddRoles<IdentityRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            builder.Services.AddHttpClient("MessagingApi", client =>
+            {
+                client.BaseAddress = new Uri("https://localhost:7213"); 
+            });
+
+
 
             builder.Services.AddRazorPages();
 
+            
+            builder.Services.AddHttpContextAccessor();
+
+           
+
             var app = builder.Build();
+
+
 
             using (var scope = app.Services.CreateScope())
             {
@@ -34,17 +48,17 @@ namespace Forumet
                 await DataSeeder.SeedRolesAndAdminAsync(services);
             }
 
-                // Configure the HTTP request pipeline.
-                if (app.Environment.IsDevelopment())
-                {
-                    app.UseMigrationsEndPoint();
-                }
-                else
-                {
-                    app.UseExceptionHandler("/Error");
-                    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                    app.UseHsts();
-                }
+            // Configure the HTTP request pipeline.
+            if (app.Environment.IsDevelopment())
+            {
+                app.UseMigrationsEndPoint();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -54,6 +68,7 @@ namespace Forumet
             app.UseAuthentication();
 
             app.UseAuthorization();
+
 
             app.MapRazorPages();
 

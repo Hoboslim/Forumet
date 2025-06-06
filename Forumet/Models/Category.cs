@@ -11,6 +11,8 @@ namespace Forumet.Models
         [Required]
         public string Name { get; set; }    
 
+        public string? ImagePath { get; set; }
+
         public ICollection<Post> Posts { get; set; } = new List<Post>();
     }
 }

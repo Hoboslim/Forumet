@@ -1,0 +1,22 @@
+﻿@page "{id:int}"
+@model Forumet.Pages.Admin.DeleteCategoryModel
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+<h2>Delete Category</h2>
+
+@if (Model.Category != null)
+{
+    <div class="alert alert-warning">
+        Are you sure you want to delete the category <strong>@Model.Category.Name</strong>?
+    </div>
+    <form method="post">
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a asp-page="/Categories/Index" class="btn btn-secondary">Cancel</a>
+    </form>
+}
+else
+{
+    <div class="alert alert-danger">Category not found.</div>
+}

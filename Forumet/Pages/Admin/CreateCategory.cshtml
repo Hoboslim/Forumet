@@ -1,0 +1,28 @@
+﻿@page
+@model Forumet.Pages.Admin.CreateCategoryModel
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<h2>Create New Category</h2>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" required />
+        <span asp-asp-validation-for="Name" class="text-danger"></span>
+    </div>
+    <div class="form group mt-2">
+        <label for="Image">Category Image</label>
+        <input type="file" asp-for="Image" class="form-control" accept="image/*" />
+        <span asp-validation-for="Image" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Create</button>
+</form>
+
+@if(Model.Success)
+{
+    <div class="alert alert-success mt-2">Category Created!!</div>
+}
+
+

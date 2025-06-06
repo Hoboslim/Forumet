@@ -1,0 +1,32 @@
+﻿@page
+@model Forumet.Pages.Messages.ChatModel
+@{
+    ViewData["Title"] = "Chat";
+}
+
+<h2>Chat with @Model.OtherUserEmail</h2>
+
+<div class="chatbox" style="max-height:400px;overflow-y:auto;border:1px solid #ccc;padding:10px;">
+    @if (Model.Conversation.Any())
+    {
+        foreach (var msg in Model.Conversation)
+        {
+            <div style="margin-bottom:10px;">
+                <strong>@(msg.SenderId == Model.CurrentUserId ? "You" : "Them"):</strong>
+                @msg.Content
+                <span class="text-muted" style="font-size:smaller;">@msg.SentAt.ToString("g")</span>
+            </div>
+        }
+    }
+    else
+    {
+        <div>No messages yet.</div>
+    }
+</div>
+
+<form method="post" class="mt-3">
+    <div class="form-group">
+        <textarea asp-for="MessageContent" class="form-control" rows="2" placeholder="Type your message..." required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Send</button>
+</form>

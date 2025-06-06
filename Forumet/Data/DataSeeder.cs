@@ -19,7 +19,7 @@ namespace Forumet.Data
             var adminEmail = "admin@example.com";
             var adminUser = await userManager.FindByEmailAsync(adminEmail);
 
-            if(adminUser == null)
+            if (adminUser == null)
             {
                 adminUser = new IdentityUser
                 {
@@ -29,7 +29,7 @@ namespace Forumet.Data
                 };
 
                 var result = await userManager.CreateAsync(adminUser, "Admin123!");
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
