@@ -20,3 +20,13 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.home-bg {
+    min-height: 100vh;
+    background: url('/images/forum-bg.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

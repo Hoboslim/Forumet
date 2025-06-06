@@ -1,10 +1,19 @@
 ﻿@page
-@model IndexModel
+@model Forumet.Pages.IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Welcome";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="home-bg">
+    <div class="text-center">
+        <h1 class="display-4 mb-4">Welcome to the biggest, baddest internet forum on the internet!</h1>
+        <p class="lead mb-4">
+            Join the conversations with millions of users, from videogames to workout routines or horses!<br />
+            <strong>Register to make a post and join us!</strong>
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a class="btn btn-lg btn-primary" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            <a class="btn btn-lg btn-outline-secondary" asp-page="/Categories/Index">Browse Categories</a>
+        </div>
+    </div>
 </div>
